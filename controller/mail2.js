@@ -18,7 +18,7 @@ export async function sendOrderEmail(email, order) {
   const info = await transporter.sendMail({
     from: `<${process.env.EMAIL}>`, // sender address
     to: email, // list of receivers
-    subject: `[브랜드이름] 주문이 접수되었습니다.`, // Subject line
+    subject: `[스타스프레이] 주문이 접수되었습니다.`, // 브랜드이름
     html:
       `<p>${order.name} 고객님</p>` +
       `<br />` +

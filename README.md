@@ -1,1 +1,1 @@
-shopping sample server real
+shopping sample server

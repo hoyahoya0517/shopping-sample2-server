@@ -18,7 +18,7 @@ export async function sendResetPasswordEmail(email, token) {
   const info = await transporter.sendMail({
     from: `<${process.env.EMAIL}>`, // sender address
     to: email, // list of receivers
-    subject: "[브랜드이름] 비밀번호 초기화를 위한 안내 메일입니다", // Subject line
+    subject: "[스타스프레이] 비밀번호 초기화를 위한 안내 메일입니다", // 브랜드이름
     html:
       "<p>비밀번호 초기화를 위해 아래의 URL을 클릭하여 주세요.</p>" +
       "<br />" +

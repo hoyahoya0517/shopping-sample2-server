@@ -18,7 +18,7 @@ export async function sendReturnEmail(email, order, cancelAmount) {
   const info = await transporter.sendMail({
     from: `<${process.env.EMAIL}>`, // sender address
     to: email, // list of receivers
-    subject: "[브랜드이름] 반품이 완료되었습니다.", // Subject line
+    subject: "[스타스프레이] 반품이 완료되었습니다.", // 브랜드이름
     html:
       `<p>${order.name} 고객님</p>` +
       `<br />` +
