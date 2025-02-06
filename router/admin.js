@@ -7,6 +7,12 @@ import wrapAsyncController from "../middleware/async-error.js";
 const router = express.Router();
 
 router.get(
+  "/products/all",
+  isAuth,
+  isAdmin,
+  wrapAsyncController(adminController.getAdminAllProducts)
+);
+router.get(
   "/product/:category",
   isAuth,
   isAdmin,
@@ -24,6 +30,12 @@ router.put(
   isAuth,
   isAdmin,
   adminController.updateAdminProduct
+);
+router.put(
+  "/product/order/update",
+  isAuth,
+  isAdmin,
+  wrapAsyncController(adminController.updateAdminProductOrder)
 );
 router.delete(
   "/product/:id",

@@ -11,6 +11,15 @@ import { sendReturnEmail } from "./mail3.js";
 dayjs.locale("ko");
 dotenv.config();
 
+export async function getAdminAllProducts(req, res) {
+  const products = await adminRepository.getAdminAllProducts();
+  if (!products)
+    return res.status(400).json({
+      message: "get products error",
+    });
+  return res.status(200).json(products);
+}
+
 export async function getAdminProduct(req, res) {
   const query = req.query;
   const q = query.q;
@@ -109,6 +118,22 @@ export async function deleteAdminProduct(req, res) {
       message: "get product error",
     });
   await adminRepository.deleteAdminProduct(id);
+  return res.sendStatus(200);
+}
+
+export async function updateAdminProductOrder(req, res) {
+  const { newProduct } = req.body;
+  if (!newProduct)
+    return res.status(400).json({
+      message: "get newProduct error",
+    });
+
+  const cleanedProducts = await newProduct.map((product) => {
+    const { id, _id, ...rest } = product;
+    return rest;
+  });
+
+  await adminRepository.updateAdminProductOrder(cleanedProducts);
   return res.sendStatus(200);
 }
 

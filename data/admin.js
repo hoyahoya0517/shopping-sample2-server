@@ -38,6 +38,13 @@ import { fixIdArray } from "../utils/fixId.js";
 //   return fixIdProducts;
 // }
 
+export async function getAdminAllProducts() {
+  const products = await getProducts().find().toArray();
+  if (!products) return null;
+  const fixIdProducts = await fixIdArray(products);
+  return fixIdProducts;
+}
+
 export async function getAdminAllProductsLengthByCategory(
   q,
   searchFilter,
@@ -115,6 +122,11 @@ export async function updateAdminProduct(id, newProduct) {
 
 export async function deleteAdminProduct(id) {
   await getProducts().deleteOne({ _id: new ObjectId(id) });
+}
+
+export async function updateAdminProductOrder(newProduct) {
+  await getProducts().deleteMany({});
+  await getProducts().insertMany(newProduct);
 }
 
 //------------------------------//

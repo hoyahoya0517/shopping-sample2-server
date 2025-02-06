@@ -1,5 +1,4 @@
 import * as productRepository from "../data/product.js";
-import * as productPageSettingRepository from "../data/productPageSetting.js";
 import dotenv from "dotenv";
 dotenv.config();
 

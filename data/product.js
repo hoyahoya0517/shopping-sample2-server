@@ -3,19 +3,13 @@ import { getProducts } from "../database/database.js";
 import { fixId, fixIdArray } from "../utils/fixId.js";
 
 export async function getNewProductsLength() {
-  const products = await getProducts()
-    .find({ isNew: true })
-    .sort({ createdAt: -1 })
-    .toArray();
+  const products = await getProducts().find({ isNew: true }).toArray();
   if (!products) return null;
   return products.length;
 }
 
 export async function getAllProductsLengthByCategory(category) {
-  const products = await getProducts()
-    .find({ category })
-    .sort({ createdAt: -1 })
-    .toArray();
+  const products = await getProducts().find({ category }).toArray();
   if (!products) return null;
   return products.length;
 }
@@ -25,7 +19,6 @@ export async function getNewProductsByPage(page, productMaxLength) {
     .find({ isNew: true })
     .skip((Number(page) - 1) * Number(productMaxLength))
     .limit(Number(productMaxLength))
-    .sort({ createdAt: -1 })
     .toArray();
   if (!products) return null;
   const fixIdProducts = await fixIdArray(products);
@@ -41,7 +34,6 @@ export async function getAllProductsByCategoryByPage(
     .find({ category })
     .skip((Number(page) - 1) * Number(productMaxLength))
     .limit(Number(productMaxLength))
-    .sort({ createdAt: -1 })
     .toArray();
   if (!products) return null;
   const fixIdProducts = await fixIdArray(products);
@@ -58,7 +50,6 @@ export async function getProductById(id) {
 export async function getProductBySearch(q) {
   const products = await getProducts()
     .find({ name: { $regex: q } })
-    .sort({ createdAt: -1 })
     .toArray();
   if (!products) return null;
   const fixIdProducts = await fixIdArray(products);
